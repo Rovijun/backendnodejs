@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const Header = require("./models/Header");
-const Formation = require("./models/Formation");
+const formationRoutes = require("./routes/formation");
 require("dotenv").config();
 const app = express();
 
@@ -21,28 +21,6 @@ app.get('/api/header', (req, res, next) => {
     Header.find().then(headers => res.status(200).json(headers));
 });
 
-app.get('/api/formation', (req, res, next) => {
-    Formation.find().then(formations => res.status(200).json(formations));
-});
-
-app.post('/api/formation', (req, res, next) => {
-    const formation = new Formation({ ...req.body });
-    formation.save().then(() => res.status(201).json({ message: `Formation crée !`})).catch((error) => res.status(400).json({ error }));
-});
-
-app.delete('/api/formation/:id', (req, res, next) => {
-    Formation.deleteOne({ _id: req.params.id })
-        .then(() => res.status(200).json({ message: `Formation supprimée !`}))
-        .catch((error) => res.status(400).json({ error }));
-});
-
-app.put('/api/formation/:id', (req, res, next) => {
-    Formation.updateOne(
-        { _id: req.params.id },
-        { ...req.body, _id: req.params.id }
-    )
-        .then(() => res.status(200).json({ message: `Formation modifiée !`}))
-        .catch((error) => res.status(400).json({ error }));
-});
+app.use("/api/formation", formationRoutes);
 
 module.exports = app;
