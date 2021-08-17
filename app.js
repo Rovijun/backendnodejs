@@ -5,6 +5,8 @@ const formationRoutes = require("./routes/formation");
 const headerRoutes = require("./routes/header");
 const devexperienceRoutes = require("./routes/devexp");
 const noexperienceRoutes = require("./routes/nodevexp");
+const hardRoutes = require("./routes/hard");
+const softRoutes = require("./routes/soft");
 require("dotenv").config();
 const app = express();
 
@@ -26,5 +28,9 @@ app.use("/api/formation", formationRoutes);
 app.use("/api/experience/devexp", devexperienceRoutes);
 
 app.use("/api/experience/nodevexp", noexperienceRoutes);
+
+app.use("/api/competences/hard", hardRoutes);
+
+app.use("/api/competences/soft", softRoutes);
 
 module.exports = app;
