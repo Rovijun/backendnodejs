@@ -3,6 +3,8 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const formationRoutes = require("./routes/formation");
 const headerRoutes = require("./routes/header");
+const devexperienceRoutes = require("./routes/devexp");
+const noexperienceRoutes = require("./routes/nodevexp");
 require("dotenv").config();
 const app = express();
 
@@ -20,5 +22,9 @@ app.use(express.json());
 app.use('/api/header', headerRoutes);
 
 app.use("/api/formation", formationRoutes);
+
+app.use("/api/experience/devexp", devexperienceRoutes);
+
+app.use("/api/experience/nodevexp", noexperienceRoutes);
 
 module.exports = app;
