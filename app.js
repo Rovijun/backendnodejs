@@ -26,8 +26,23 @@ app.get('/api/formation', (req, res, next) => {
 });
 
 app.post('/api/formation', (req, res, next) => {
-    const formation = new Formation({...req.body});
-    formation.save().then(() => res.status(201).json({ message: `Formation crée !`})).catch(error=>res.status(400).json({error}));
+    const formation = new Formation({ ...req.body });
+    formation.save().then(() => res.status(201).json({ message: `Formation crée !`})).catch((error) => res.status(400).json({ error }));
+});
+
+app.delete('/api/formation/:id', (req, res, next) => {
+    Formation.deleteOne({ _id: req.params.id })
+        .then(() => res.status(200).json({ message: `Formation supprimée !`}))
+        .catch((error) => res.status(400).json({ error }));
+});
+
+app.put('/api/formation/:id', (req, res, next) => {
+    Formation.updateOne(
+        { _id: req.params.id },
+        { ...req.body, _id: req.params.id }
+    )
+        .then(() => res.status(200).json({ message: `Formation modifiée !`}))
+        .catch((error) => res.status(400).json({ error }));
 });
 
 module.exports = app;
