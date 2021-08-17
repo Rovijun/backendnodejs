@@ -3,11 +3,12 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const Header = require("./models/Header");
 const Formation = require("./models/Formation");
+require("dotenv").config();
 const app = express();
 
 mongoose
     .connect(
-        'mongodb+srv://rovijun:Rovijun21@clusterme.ne5g0.mongodb.net/nodejs?retryWrites=true&w=majority',
+        `mongodb+srv://${process.env.NODE_LOGIN_MONGOOSE}:${process.env.NODE_PASSWORD_MONGOOSE}@clusterme.ne5g0.mongodb.net/${process.env.NODE_DBNAME_MONGOOSE}?retryWrites=true&w=majority`,
         { useNewUrlParser: true, userUnifiedTopology: true }
     )
     .then(()=> console.log("connexion à MongoDB réussie !"))
