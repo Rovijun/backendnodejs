@@ -9,7 +9,7 @@ const app = express();
 mongoose
     .connect(
         `mongodb+srv://${process.env.NODE_LOGIN_MONGOOSE}:${process.env.NODE_PASSWORD_MONGOOSE}@clusterme.ne5g0.mongodb.net/${process.env.NODE_DBNAME_MONGOOSE}?retryWrites=true&w=majority`,
-        { useNewUrlParser: true, userUnifiedTopology: true }
+        { useNewUrlParser: true, useUnifiedTopology: true }
     )
     .then(()=> console.log("connexion à MongoDB réussie !"))
     .catch(()=> console.log("connexion à MongoDB échouée !"));  

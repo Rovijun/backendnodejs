@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const Formation = require("../models/Formation");
 const formationController = require("../controllers/formation");
 
 
